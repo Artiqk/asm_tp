@@ -4,12 +4,20 @@ section .text
 _start:
 	push ebp
 	mov ebp, esp
-	cmp byte [ebp + 4], 2
+	add ebp, 4
+	cmp byte [ebp], 2
+	jne exit
+
+	mov ebx, [ebp + 8]
+
+	cmp byte [ebx], 0x34
+	jne exit
+	cmp byte [ebx + 1], 0x32
 	jne exit
 
 	mov ebx, 1
 	mov ecx, msg
-	mov edx, 1
+	mov edx, len
 	mov eax, 0x04
 	int 0x80
 
