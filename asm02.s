@@ -14,7 +14,6 @@ _start:
 	cmp byte [str+1], 0x32 	; compare second character with "2"
 	jne notuniverse			; if not equal => jump to notuniverse
 
-universe:
 	mov ebx, 1
 	mov ecx, msg
 	mov edx, len
@@ -24,7 +23,7 @@ universe:
 	mov ebx, 0
 	jmp exit
 
-notuniverse:
+not_equal:
 	mov ebx, 1
 
 exit:

@@ -10,18 +10,22 @@ _start:
 
 	mov edx, [ebp + 8]  ; we store argv[0] in edx
 	cmp byte [edx], 0x34 
-	jne exit
+	jne not_equal
 	cmp byte [edx + 1], 0x32
-	jne exit
+	jne not_equal
 
 	mov ebx, 1
 	mov ecx, msg
 	mov edx, len
 	mov eax, 0x04
 	int 0x80
+	mov ebx, 0
+	jmp exit
+
+not_equal:
+	mov ebx, 1
 
 exit:
-	mov ebx, 0
 	mov eax, 0x01
 	int 0x80
 
