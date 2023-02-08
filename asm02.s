@@ -3,15 +3,9 @@ section .text
 	global _start
 
 _start:
-	mov ebx, 1
-	mov ecx, msg
-	mov edx, len
-	mov eax, 0x04
-	int 0x80
-
 	mov ebx, 0
 	mov ecx, str
-	mov edx, 5
+	mov edx, 2
 	mov eax, 0x03
 	int 0x80
 
@@ -21,6 +15,12 @@ _start:
 	jne notuniverse
 
 universe:
+	mov ebx, 1
+	mov ecx, msg
+	mov edx, len
+	mov eax, 0x04
+	int 0x80
+
 	mov ebx, 0
 	jmp exit
 
@@ -35,4 +35,4 @@ exit:
 section .data
 	msg: db "1337", 10
 	len: equ $-msg
-	str: db 5
+	str: db 2
