@@ -8,11 +8,10 @@ _start:
 	cmp byte [ebp], 2
 	jne exit
 
-	mov ebx, [ebp + 8]
-
-	cmp byte [ebx], 0x34
+	mov edx, [ebp + 8]
+	cmp byte [edx], 0x34
 	jne exit
-	cmp byte [ebx + 1], 0x32
+	cmp byte [edx + 1], 0x32
 	jne exit
 
 	mov ebx, 1
