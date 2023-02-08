@@ -3,16 +3,16 @@ section .text
 	global _start
 
 _start:
-	mov ebx, 0
-	mov ecx, str
-	mov edx, 2
-	mov eax, 0x03
+	mov ebx, 0 		; int file_descriptor => 0 = stdin
+	mov ecx, str 	; variable to store input
+	mov edx, 2 		; length of the input
+	mov eax, 0x03 	; syscall id for => read
 	int 0x80
 
-	cmp byte [str], 0x34
-	jne notuniverse
-	cmp byte [str+1], 0x32
-	jne notuniverse
+	cmp byte [str], 0x34 	; compare first character with "4"
+	jne notuniverse			; if not equal => jump to notuniverse
+	cmp byte [str+1], 0x32 	; compare second character with "2"
+	jne notuniverse			; if not equal => jump to notuniverse
 
 universe:
 	mov ebx, 1
