@@ -2,14 +2,14 @@ section .text
 	global _start
 
 _start:
+	push ebp
 	mov ebp, esp
-	add ebp, 4
-	cmp ebp, 2
+	cmp byte [ebp + 4], 2
 	jne exit
 
 	mov ebx, 1
 	mov ecx, msg
-	mov edx, len
+	mov edx, 1
 	mov eax, 0x04
 	int 0x80
 
@@ -21,5 +21,4 @@ exit:
 
 section .data
 	msg: db "1337", 0x0a
-	; cmpstr: db "42", 0x0a
 	len: equ $-msg
