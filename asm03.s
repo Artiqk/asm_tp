@@ -2,8 +2,9 @@ section .text
 	global _start
 
 _start:
-	mov ebx, [esp + 4]
-	cmp ebx, 2
+	mov ebp, esp
+	add ebp, 4
+	cmp ebp, 2
 	jne exit
 
 	mov ebx, 1
