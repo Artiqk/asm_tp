@@ -4,7 +4,26 @@ section .text
 	global _start
 
 _start:
-	mov ebx, 0x2a
+	mov ebp, esp
+	add ebp, 8
+
+	mov eax, [ebp]
+	xor ebx, ebx
+
+.loop:
+	mov cl, byte [eax]
+	cmp cl, 0
+	je .done_converting
+	sub cl, 0x30
+	imul ebx, 10
+	add ebx, ecx
+	inc eax
+	jmp .loop
+
+.done_converting:
+	xor ecx, ecx
+	xor eax, eax
+	
 	mov ecx, 0
 
 	mov eax, ebx
