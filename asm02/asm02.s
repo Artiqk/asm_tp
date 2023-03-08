@@ -2,9 +2,10 @@ section .data
 	buf: db "42", 0x0a
 	msg: db "1337", 0x0a
 	len: equ $-msg
+	max: equ $-buf
 
 section .bss
-	str: resb 10 ; allocate 2 bytes for str
+	str: resb 10 ; allocate 10 bytes for str
 
 section .text
 	global _start
@@ -12,7 +13,7 @@ section .text
 _start:
 	mov ebx, 0 		; int file_descriptor => 0 = stdin
 	mov ecx, str 	; variable to store input
-	mov edx, 2 		; length of the input
+	mov edx, 10 	; length of the input
 	mov eax, 0x03 	; syscall id for => read
 	int 0x80
 
@@ -20,12 +21,17 @@ _start:
 
 .loop:
 	mov al, [buf + ecx]			; move buf character to al register
-	cmp al, 0x0a		
-	je .equal 					; jump if character is a line feed
+	cmp al, 0x0a
+	je .test_size
 	cmp byte [str + ecx], al	; compare every characters of str and buf using ecx as index
 	jne .not_equal				; if one character is not equal => jump to .not_equal
 	inc ecx
 	jmp .loop
+
+.test_size:
+	cmp byte[str + ecx], 0x0a
+	jne .not_equal
+	jmp .equal
 
 .equal:
 	; print msg
