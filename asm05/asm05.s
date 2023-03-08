@@ -44,7 +44,7 @@ _start:
 	; 42 / 10 : q = 4 r = 2
 	;  4 / 10 : q : 0 r = 4
 	inc ecx 	; counter for number of digit in the number
-	cmp eax 	; if q = 0 then last digit was pushed
+	cmp eax, 0 	; if q = 0 then last digit was pushed
 	jne .to_decimal
 
 	xor edx, edx
