@@ -4,7 +4,7 @@ section .data
 	len: equ $-msg
 
 section .bss
-	str: resb 2 ; allocate 2 bytes for str
+	str: resb 10 ; allocate 2 bytes for str
 
 section .text
 	global _start
